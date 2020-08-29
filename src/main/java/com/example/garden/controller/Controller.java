@@ -16,6 +16,6 @@ public class Controller {
 
     @GetMapping("/hello")
     public String home() {
-        return "Hello World";
+        return "This is GARDEN module";
     }
 }

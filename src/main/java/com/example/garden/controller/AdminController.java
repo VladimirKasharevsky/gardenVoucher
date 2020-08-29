@@ -1,11 +1,9 @@
 package com.example.garden.controller;
 
+import com.example.garden.entity.Garden;
 import com.example.garden.entity.Response;
-import com.example.garden.entity.UserProfile;
-import com.example.garden.repository.UserProfileRepository;
-import com.example.garden.service.UserService;
+import com.example.garden.service.GardenService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -14,23 +12,23 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
 
     @Autowired
-    private UserService userService;
+    private GardenService gardenService;
 
-    @DeleteMapping("/user/{userId}")
-    public Response userDelete(@PathVariable long userId) {
-        userService.deleteUser(userId);
-        return new Response(null, "User deleted");
+    @PostMapping("/garden/create")
+    public Response createGarden(@RequestBody Garden garden) {
+        gardenService.addGarden(garden);
+        return new Response(null,"Garden created");
     }
 
-    @PatchMapping ("/user/block/{userId}")
-    public Response userBlock(@PathVariable long userId) {
-        userService.changeUserStatus(userId, "block");
-        return new Response(null, "User blocked");
+    @PostMapping("garden/change/{gardenId}")
+    public Response changeGarden(@PathVariable long gardenId, @RequestBody Garden garden) {
+        gardenService.changeGarden(gardenId, garden);
+        return new Response(null,"Garden updated");
     }
 
-    @PatchMapping ("/user/unlock/{userId}")
-    public Response userUnLock(@PathVariable long userId) {
-        userService.changeUserStatus(userId, "active");
-        return new Response(null, "User unlocked");
+    @DeleteMapping("/garden/{gardenId}")
+    public Response deleteGarden(@PathVariable long gardenId) {
+        gardenService.deleteGarden(gardenId);
+        return new Response(null, "Garden deleted");
     }
 }
