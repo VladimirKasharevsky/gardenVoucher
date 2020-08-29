@@ -1,8 +1,8 @@
 package com.example.garden.controller;
 
-import com.example.garden.entity.Garden;
+import com.example.garden.entity.Voucher;
 import com.example.garden.entity.Response;
-import com.example.garden.service.GardenService;
+import com.example.garden.service.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,23 +12,23 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
 
     @Autowired
-    private GardenService gardenService;
+    private VoucherService voucherService;
 
-    @PostMapping("/garden/create")
-    public Response createGarden(@RequestBody Garden garden) {
-        gardenService.addGarden(garden);
-        return new Response(null,"Garden created");
+    @PostMapping("/voucher/create")
+    public Response createGarden(@RequestBody Voucher voucher) {
+        voucherService.addVoucher(voucher);
+        return new Response(null,"Voucher created");
     }
 
-    @PostMapping("garden/change/{gardenId}")
-    public Response changeGarden(@PathVariable long gardenId, @RequestBody Garden garden) {
-        gardenService.changeGarden(gardenId, garden);
-        return new Response(null,"Garden updated");
+    @PostMapping("voucher/change/{voucherId}")
+    public Response changeGarden(@PathVariable long voucherId, @RequestBody Voucher voucher) {
+        voucherService.changeVoucher(voucherId, voucher);
+        return new Response(null,"Voucher updated");
     }
 
-    @DeleteMapping("/garden/{gardenId}")
-    public Response deleteGarden(@PathVariable long gardenId) {
-        gardenService.deleteGarden(gardenId);
-        return new Response(null, "Garden deleted");
+    @DeleteMapping("/voucher/{voucherId}")
+    public Response deleteGarden(@PathVariable long voucherId) {
+        voucherService.deleteVoucher(voucherId);
+        return new Response(null, "Voucher deleted");
     }
 }
